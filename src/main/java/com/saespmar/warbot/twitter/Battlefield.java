@@ -26,7 +26,8 @@ public class Battlefield {
     /**
      *
      * <p>Create a new battlefield. The generated images are stored in the same
-     * directory as the .txt list of participants.</p>
+     * directory as the .txt list of participants. Only the first 100 items
+     * will be taken into account.</p>
      *
      * @param participantsFile a list of participants, one per line. If the
      * participant is dead, the line starts with a #.
@@ -43,7 +44,8 @@ public class Battlefield {
      * <p>Create a new battlefield.</p>
      *
      * @param participantsFile a list of participants, one per line. If the
-     * participant is dead, the line starts with a #.
+     * participant is dead, the line starts with a #. Only the first 100 items
+     * will be taken into account.
      * @param picturePath path where the generated images are stored.
      *
      * @see <a href="example_battlefield/battle.txt">Example of the format of
@@ -70,10 +72,17 @@ public class Battlefield {
      * <p>Set the list of participants.</p>
      *
      * @param participants an ArrayList with the information from the
-     * participants.
+     * participants. The list can't contain more than 100 participants.
      */
     public void setParticipants(ArrayList<Participant> participants) {
+        if (participants.size() > 100) throw new IllegalArgumentException("The list can't contain more than 100 participants");
         this.participants = participants;
+        
+        // Update the alive count
+        alive = 0;
+        for (Participant p : participants){
+            if (p.isAlive()) alive++;
+        }
     }
     
     /**
@@ -104,7 +113,7 @@ public class Battlefield {
      * retrieved.</p>
      *
      * @param participantsFile the file with all the participants and their
-     * status.
+     * status. Only the first 100 items will be taken into account.
      *
      * @see <a href="example_battlefield/battle.txt">Example of the format of
      * the file.</a>
@@ -187,10 +196,10 @@ public class Battlefield {
     
     /**
      *
-     * <p>Updates the list of participants file with the information stored in 
+     * <p>Updates the list of participants file with the information stored in
      * memory. The file with this list of participants can be set through the
-     * {@link #setParticipants(ArrayList<Participant>) setParticipants} method. 
-     * It's strongly recommended to call this method every time the ArrayList 
+     * {@link #setParticipants(ArrayList<Participant>) setParticipants} method.
+     * It's strongly recommended to call this method every time the ArrayList
      * of participants changes.</p>
      */
     public void updateFile(){
@@ -219,8 +228,8 @@ public class Battlefield {
      *
      * <p>Selects a random participant to kill other random participant.</p>
      *
-     * @return an array which has the killer in position 0 and the victim in 
-     * position 1. If there are less than 2 participants, null is returned, 
+     * @return an array which has the killer in position 0 and the victim in
+     * position 1. If there are less than 2 participants, null is returned,
      * because the game has ended.
      */
     public Participant[] fight(){
