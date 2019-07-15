@@ -1,5 +1,12 @@
 package com.saespmar.warbot.twitter;
 
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.FontMetrics;
+import java.awt.Graphics2D;
+import java.awt.RenderingHints;
+import java.awt.font.TextAttribute;
+import java.awt.image.BufferedImage;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -8,7 +15,9 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.security.SecureRandom;
 import java.util.ArrayList;
+import java.util.Hashtable;
 import java.util.Random;
+import javax.imageio.ImageIO;
 
 /**
  *
@@ -257,6 +266,89 @@ public class Battlefield {
         Participant killer = surviving.get(killerIndex);
         
         Participant[] result = {killer, victim};
+        return result;
+    }
+    
+    /**
+     *
+     * <p>Creates an image in the directory specified in the
+     * {@link #setPicturePath(String) setPicturePath} method. The file is 
+     * stored as [alive]remaining.jpg in it. This image contains a table with 
+     * information about all the participants status.</p>
+     * 
+     * @return the generated image file.
+     */
+    public File drawTable() {
+        int size = participants.size();
+        int columns = size/26 + 1; // Max. 25 participants per on each column
+        int rows = size/columns; // Split participants equally in all columns
+        
+        /**
+         *
+         * The number of columns and rows may not fit perfectly because of the number of participants
+         * (for example, an odd number can't be perfectly splitted in 2 columns). In these scenarios,
+         * an additional row is needed
+         */
+        if (columns*rows != size) rows++;
+        
+        int width = columns * 250;
+        int height = rows * 20;
+        BufferedImage img = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
+        Graphics2D g2d = img.createGraphics();
+        g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+        
+        // Normal font
+        Font aliveFont = new Font("Console", Font.PLAIN, 15);
+        g2d.setFont(aliveFont);
+        FontMetrics fm = g2d.getFontMetrics();
+        
+        // Crossed font for dead participants
+        Font deadFont = new Font("Console", Font.PLAIN, 15);
+        Hashtable<TextAttribute, Object> map = new Hashtable<>();
+        map.put(TextAttribute.STRIKETHROUGH, TextAttribute.STRIKETHROUGH_ON);
+        deadFont = deadFont.deriveFont(map);
+        
+        // Background
+        g2d.setPaint(Color.WHITE);
+        g2d.fillRect(0, 0, width, height);
+        
+        // Text
+        for (int i = 0; i<columns; i++){
+            int verticalOffset = 0; // A new column begins
+            for (int j = 0; j<rows; j++){
+                int index = j + i*rows;
+                if (index < size){
+                    Participant p = participants.get(index);
+                    String text = p.getName();
+                    
+                    // Set font
+                    if (p.isAlive()){
+                        g2d.setFont(aliveFont);
+                        g2d.setColor(Color.BLACK);
+                    }
+                    else{
+                        g2d.setFont(deadFont);
+                        g2d.setColor(Color.RED);
+                    }
+                    
+                    // Draw string
+                    // Very long names are cut and ended with ...
+                    if (text.length() > 34)
+                        g2d.drawString(text.substring(0, 31) + "...", i*250, fm.getAscent()+verticalOffset);
+                    else
+                        g2d.drawString(text, i*250, fm.getAscent()+verticalOffset);
+                    
+                    verticalOffset += 20;
+                }
+            }
+        }
+        g2d.dispose();
+        File result = new File(picturePath + "/" + alive + "remaining.jpg");
+        try {
+            ImageIO.write(img, "jpg", result);
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
         return result;
     }
 }
