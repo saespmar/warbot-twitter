@@ -5,7 +5,7 @@ package com.saespmar.warbot.twitter;
  * <p>Represents a contender</p>
  *
  * @author saespmar
- * @version 0.0.1
+ * @version 1.0
  */
 public class Participant {
     private String name;

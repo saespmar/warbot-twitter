@@ -11,7 +11,7 @@ import java.io.IOException;
  * <p>Stores the authentication configuration for accessing the Twitter API.</p>
  *
  * @author saespmar
- * @version 0.0.1
+ * @version 1.0
  */
 public class Authentication {
     private String CONSUMER_KEY;

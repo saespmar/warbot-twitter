@@ -24,7 +24,7 @@ import javax.imageio.ImageIO;
  * <p>Represents a battlefield where the participants fight.</p>
  *
  * @author saespmar
- * @version 0.0.1
+ * @version 1.0
  */
 public class Battlefield {
     private ArrayList<Participant> participants = new ArrayList<>();
