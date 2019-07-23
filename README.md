@@ -16,7 +16,7 @@ Create a main class similar to the provided in the [demo](src/test/java/com/saes
 
 If everything went OK, the tweets should look like this:
 <p align="center">
-  <img src="images/screenshot.png" alt="screenshot">
+  <img src="images/Screenshot.png" alt="screenshot">
 </p>
 
 
