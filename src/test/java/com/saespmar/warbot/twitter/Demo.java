@@ -55,7 +55,7 @@ public class Demo {
         File image = battlefield.drawTable();
         
         // Send tweet
-        String text = battle[0].getName() + " kills " + battle[1].getName() + " [" + battlefield.getAlive() + " remaning]";
+        String text = battle[0].getName() + " kills " + battle[1].getName() + " [" + battlefield.getAlive() + " remaining]";
         if (battlefield.getAlive() < 2) text += ". The game has ended";
         StatusUpdate status = new StatusUpdate(text);
         status.setMedia(image);
