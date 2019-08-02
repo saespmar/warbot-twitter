@@ -1,5 +1,7 @@
 package com.saespmar.warbot.twitter;
 
+import java.util.Objects;
+
 /**
  *
  * <p>Represents a contender</p>
@@ -73,5 +75,34 @@ public class Participant {
     public void setAlive(boolean alive) {
         this.alive = alive;
     }
-    
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 97 * hash + Objects.hashCode(this.name);
+        hash = 97 * hash + (this.alive ? 1 : 0);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Participant other = (Participant) obj;
+        if (this.alive != other.alive) {
+            return false;
+        }
+        if (!Objects.equals(this.name, other.name)) {
+            return false;
+        }
+        return true;
+    }
+
 }
