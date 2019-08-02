@@ -165,6 +165,7 @@ public class Battlefield {
             int max = 100; // No more than 100 participants
             int i = 0;
             alive = 0;
+            participants = new ArrayList<>();
             
             // Iterate through the list
             String current;
