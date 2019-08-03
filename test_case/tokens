@@ -1,0 +1,10 @@
+
+CONSUMER_KEY =         oauth_api_key   
+CONSUMER_SECRET=  oauth_api_secret_key   
+
+UNKNOWN_KEY = ???
+
+ACCESS_KEY      = oauth_access_token
+ACCESS_SECRET = oauth_access_token_secret
+
+
