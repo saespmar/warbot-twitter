@@ -5,6 +5,9 @@
 # Log file
 *.log
 
+# Project metadata
+/nbproject/
+
 # Package Files #
 *.jar
 *.war
