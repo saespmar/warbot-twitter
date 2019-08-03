@@ -67,7 +67,7 @@ public class Demo {
     }
     
     public static void scheduledTweet(int hours){
-        ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
+        final ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
         scheduler.scheduleAtFixedRate(new Runnable(){
             @Override
             public void run(){
