@@ -1,7 +1,13 @@
 # Warbot for Twitter
-<p align="center">
-  <img src="https://img.shields.io/badge/version-1.0-blue.svg" alt="version">
-</p>
+
+![Version](https://img.shields.io/badge/version-1.0-blue.svg)
+[![Build Status](https://travis-ci.org/saespmar/warbot-twitter.svg?branch=master)](https://travis-ci.org/saespmar/warbot-twitter)
+[![codecov](https://codecov.io/gh/saespmar/warbot-twitter/branch/master/graph/badge.svg)](https://codecov.io/gh/saespmar/warbot-twitter)
+![GitHub](https://img.shields.io/github/license/saespmar/warbot-twitter)
+[![GitHub issues](https://img.shields.io/github/issues/saespmar/warbot-twitter)](https://github.com/saespmar/warbot-twitter/issues)
+[![GitHub stars](https://img.shields.io/github/stars/saespmar/warbot-twitter)](https://github.com/saespmar/warbot-twitter/stargazers)
+
+
 Create a Twitter warbot that automatically tweets the state of a battle royale game. It randomly selects 2 participants from a list to fight each other: one wins, the other one dies. The last contender standing is the winner. The updates are periodically published on Twitter (including an image) until the game finishes.
 
 ## Getting Started
